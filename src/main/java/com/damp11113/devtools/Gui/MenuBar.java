@@ -5,6 +5,7 @@ import com.damp11113.devtools.interfaces.Renderable;
 import com.damp11113.devtools.interfaces.Theme;
 import imgui.ImGui;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.server.command.ServerCommandSource;
 
 public class MenuBar implements Renderable {
 
@@ -20,6 +21,7 @@ public class MenuBar implements Renderable {
 
     @Override
     public void render() {
+        FillGui.Render();
         if (ImGui.beginMainMenuBar()) {
             if (ImGui.beginMenu("[DevTools]")) {
                 ImGui.menuItem("New Project");
@@ -28,13 +30,14 @@ public class MenuBar implements Renderable {
                 ImGui.menuItem("Open");
                 ImGui.separator();
                 if (ImGui.menuItem("Exit")) {
-                    //MinecraftClient.getInstance().stop();
-                    DevTools.LOGGER.info("Exit func (not used)");
+                    MinecraftClient.getInstance().disconnect();
                 }
                 ImGui.endMenu();
             }
             if (ImGui.beginMenu("Tools")) {
-                ImGui.menuItem("NBT edit");
+                if (ImGui.menuItem("Fill", "", FillGui.show)) {
+                    FillGui.show = !FillGui.show;
+                }
                 ImGui.endMenu();
             }
             if (ImGui.beginMenu("Options")) {
