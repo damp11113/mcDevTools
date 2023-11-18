@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "com.damp11113.devtools.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"DevToolsMixin",
+		"GLFWInitMixin",
+		"TailRenderMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
